@@ -1,4 +1,4 @@
-package eu.bertom.lab.plugin.capacitorinsetspluginv2;
+package eu.bertom.lab.capacitor.plugin.insetsv2;
 
 import android.app.Activity;
 
@@ -8,14 +8,14 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
-@CapacitorPlugin(name = "InsetsPluginV2")
-public class InsetsPluginV2Plugin extends Plugin {
+@CapacitorPlugin(name = "InsetsV2")
+public class InsetsV2Plugin extends Plugin {
 
-    private InsetsPluginV2 implementation;
+    private InsetsV2 implementation;
 
     @Override
     public void load() {
-        this.implementation = new InsetsPluginV2(getActivity());
+        this.implementation = new InsetsV2(getActivity());
     }
 
     @PluginMethod
