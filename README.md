@@ -1,37 +1,41 @@
+
 # capacitor-insets-v2
+Plugin that sends the device insets, works only on android, and send only top, based on an original idea from [https://github.com/igorcd/capacitor-insets-plugin](https://github.com/igorcd/capacitor-insets-plugin/) which works only for Capacitor 2. This project have been refactored in order to be compatible with Capacitor v3.
+Fell free to open a pull request
 
-Insets V2 Capacitor 3 compatible Plugin
-
-## Install
-
-```bash
-npm install capacitor-insets-v2
+## Installation:
+```sh
+npm install --save https://github.com/jorisbertomeu/capacitor-insets-v2
 npx cap sync
 ```
 
-## API
+# Android:
+```java
+// Add this line
+import eu.bertom.lab.capacitor.plugin.insetsv2.InsetsV2Plugin;
 
-<docgen-index>
+public class MainActivity extends BridgeActivity {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-* [`echo(...)`](#echo)
-
-</docgen-index>
-
-<docgen-api>
-<!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
-
-### echo(...)
-
-```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
+   	// Add this line
+	registerPlugin(InsetsV2Plugin.class);
+  }
+}
 ```
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
 
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+## Usage:
+```typescript
+const { StatusBar, InsetsV2 } = Plugins;
 
---------------------
-
-</docgen-api>
+try {
+	const insetsResp = await InsetsV2.top();
+	StatusBar.setOverlaysWebView({ overlay: true });
+	document.documentElement.style.setProperty('--ion-safe-area-top', `${insetsResp.value}px`);
+} catch(e) {
+	console.log(e);
+}
+   
+```

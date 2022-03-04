@@ -1,9 +1,6 @@
 package eu.bertom.lab.capacitor.plugin.insetsv2;
 
-import android.app.Activity;
-import android.graphics.Rect;
 import android.util.DisplayMetrics;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class InsetsV2 {
@@ -15,11 +12,14 @@ public class InsetsV2 {
     }
 
     public float getTop() {
-        Rect rectangle = new Rect();
+        float titleBarHeight = 0;
 
-        this.activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rectangle);
+        int resourceId = this.activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            titleBarHeight = this.activity.getResources().getDimensionPixelSize(resourceId);
+        }
         DisplayMetrics metrics = this.activity.getResources().getDisplayMetrics();
 
-        return rectangle.top / metrics.density;
+        return titleBarHeight / metrics.density;
     }
 }
