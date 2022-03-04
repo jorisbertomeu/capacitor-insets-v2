@@ -1,11 +1,25 @@
-package eu.bertom.lab.capacitor.plugin.insetsv2;
+package eu.bertom.lab.plugin.capacitorinsetspluginv2;
 
-import android.util.Log;
+import android.app.Activity;
+import android.graphics.Rect;
+import android.util.DisplayMetrics;
 
-public class InsetsV2 {
+import androidx.appcompat.app.AppCompatActivity;
 
-    public String echo(String value) {
-        Log.i("Echo", value);
-        return value;
+public class InsetsPluginV2 {
+
+    private AppCompatActivity activity;
+
+    public InsetsPluginV2(AppCompatActivity activity) {
+        this.activity = activity;
+    }
+
+    public float getTop() {
+        Rect rectangle = new Rect();
+
+        this.activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rectangle);
+        DisplayMetrics metrics = this.activity.getResources().getDisplayMetrics();
+
+        return rectangle.top / metrics.density;
     }
 }

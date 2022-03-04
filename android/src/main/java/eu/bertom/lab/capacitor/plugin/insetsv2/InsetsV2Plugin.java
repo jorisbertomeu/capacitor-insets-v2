@@ -1,4 +1,6 @@
-package eu.bertom.lab.capacitor.plugin.insetsv2;
+package eu.bertom.lab.plugin.capacitorinsetspluginv2;
+
+import android.app.Activity;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -6,17 +8,24 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
-@CapacitorPlugin(name = "InsetsV2")
-public class InsetsV2Plugin extends Plugin {
+@CapacitorPlugin(name = "InsetsPluginV2")
+public class InsetsPluginV2Plugin extends Plugin {
 
-    private InsetsV2 implementation = new InsetsV2();
+    private InsetsPluginV2 implementation;
+
+    @Override
+    public void load() {
+        this.implementation = new InsetsPluginV2(getActivity());
+    }
 
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
+    public void top(PluginCall call) {
 
-        JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
-        call.resolve(ret);
+        //getBridge().executeOnMainThread(() -> {
+            float statusBarHeight = implementation.getTop();
+            JSObject ret = new JSObject();
+            ret.put("value", statusBarHeight);
+            call.resolve(ret);
+        //});
     }
 }
