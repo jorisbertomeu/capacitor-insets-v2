@@ -17,10 +17,9 @@ import eu.bertom.lab.capacitor.plugin.insetsv2.InsetsV2Plugin;
 public class MainActivity extends BridgeActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-   	// Add this line
+  	// Add this line
 	registerPlugin(InsetsV2Plugin.class);
+    	super.onCreate(savedInstanceState);
   }
 }
 ```
